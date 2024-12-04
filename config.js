@@ -38,7 +38,7 @@ module.exports = {
 
   nodes: [
     {
-        name: "Server",
+        name: "NODE",
         host: "lavalink.devamop.in",
         port: 443,
         password: "DevamOP",
