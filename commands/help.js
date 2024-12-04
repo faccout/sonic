@@ -32,6 +32,7 @@ module.exports = {
       const botName = client.user.username; 
 
       const helpDescription = `
+🎶 Sonic Player: Enjoy seamless music playback with Sonic Player. Explore advanced features from 16:00 AST to 21:00 AST. This is the demo section—experience the full power of Sonic Player during its active hours!
 \`\`\`css
 Welcome to ${botName}!
 
@@ -48,6 +49,8 @@ Your ultimate music companion on Discord. Here are the available commands:
 [ /ping    ] - Check bot latency.
 [ /support ] - Shows support server info.
 [ /help    ] - Display this help menu.
+
+Version 1.4.2
 \`\`\`
       `;
 
@@ -56,7 +59,7 @@ Your ultimate music companion on Discord. Here are the available commands:
         .setTitle(`${botName} Help`)
         .setThumbnail(client.user.displayAvatarURL()) 
         .setDescription(helpDescription)
-        .setFooter({ text: `Prime Music v1.0`, iconURL: client.user.displayAvatarURL() }) 
+        .setFooter({ text: `Sonic Player`, iconURL: client.user.displayAvatarURL() }) 
       
 
       return interaction.reply({ embeds: [embed] });
