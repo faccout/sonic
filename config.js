@@ -39,12 +39,12 @@ module.exports = {
   nodes: [
     {
         name: "Server",
-        host: "lava.link",
-        port: 80,
-        password: "CodeX",
+        host: "lavalink.devamop.in",
+        port: 443,
+        password: "DevamOP",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
-        secure: false
+        secure: true 
     },
  ]
 }
