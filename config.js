@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "Server",
-        host: "nodev4.fypmoon.org",
-        port: 1118,
-        password: "fypmoon.org",
+        host: "lava1.horizxon.studio",
+        port: 80,
+        password: "horizxon.studio",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false
