@@ -32,7 +32,7 @@ module.exports = {
       const supportServerLink = "https://discord.gg/QHzdUj2VqN";
       const githubLink = "https://github.com/GlaceYT";
       const replitLink = "https://replit.com/@GlaceYT";
-      const youtubeLink = "https://www.youtube.com/@GlaceYT";
+      const youtubeLink = "https://spellaexp.my.canva.site/web";
         const embed = new EmbedBuilder()
             .setColor('#b300ff')
             .setAuthor({
@@ -40,10 +40,9 @@ module.exports = {
               iconURL: 'https://cdn.discordapp.com/attachments/1230824451990622299/1297599084236116039/user.gif?ex=6751d651&is=675084d1&hm=d69aa011b13a85b959ae2529327d6070d87103314b62b1ce871fc4252c347b98&', 
               url: 'https://discord.gg/QHzdUj2VqN'
           })
-            .setDescription(`➡️ **Join our Discord server for support and updates:**\n- Discord - ${supportServerLink}\n\n➡️ 
+            setDescription(`➡️ **Join our Discord server for support and updates:**\n- Discord - ${supportServerLink}\n\n➡️ **Follow us on:**\n- Website - ${youtubeLink}`)
             .setImage('https://cdn.discordapp.com/attachments/1273947742724685875/1277995152543055932/0DC0BBD1-3E1D-4BA5-94E4-FA16355D48CA.jpg?ex=6751b5bc&is=6750643c&hm=1accf5843c766d31a9514e8e4eb596a608913763bac64c61744f3adb64644229&')
             .setTimestamp();
-
       return interaction.reply({ embeds: [embed] });
     } catch (e) {
     console.error(e); 
