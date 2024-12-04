@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalink.devamop.in",
+        host: "lava-v4.ajieblogs.eu.org",
         port: 443,
-        password: "DevamOP",
+        password: "https://dsc.gg/ajidevserver",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: true 
