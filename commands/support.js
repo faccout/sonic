@@ -29,7 +29,7 @@ module.exports = {
   run: async (client, interaction) => {
     try {
 
-      const supportServerLink = "https://discord.gg/xQF9f9yUEM";
+      const supportServerLink = "https://discord.gg/QHzdUj2VqN";
       const githubLink = "https://github.com/GlaceYT";
       const replitLink = "https://replit.com/@GlaceYT";
       const youtubeLink = "https://www.youtube.com/@GlaceYT";
@@ -37,7 +37,7 @@ module.exports = {
             .setColor('#b300ff')
             .setAuthor({
               name: 'Support Server',
-              iconURL: 'https://cdn.discordapp.com/attachments/1230824451990622299/1230824519220985896/6280-2.gif?ex=6638ae28&is=66375ca8&hm=13e4a1b91a95b2934a39de1876e66c11711c7b30ac1a91c2a158f2f2ed1c2fc6&', 
+              iconURL: 'https://cdn.discordapp.com/attachments/1230824451990622299/1253655047259160596/6186-developer-bot.gif?ex=6752cf3f&is=67517dbf&hm=2fb358f4578004ae3ed9b41e1d43b27e7e051ddc07deeb38e0dac9bca1960bea&', 
               url: 'https://discord.gg/xQF9f9yUEM'
           })
             .setDescription(`➡️ **Join our Discord server for support and updates:**\n- Discord - ${supportServerLink}\n\n➡️ **Follow us on:**\n- GitHub - ${githubLink}\n- Replit - ${replitLink}\n- YouTube - ${youtubeLink}`)
