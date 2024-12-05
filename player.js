@@ -46,16 +46,13 @@ function initializePlayer(client) {
         const requester = requesters.get(trackUri);
 
        try {
-            const musicard = await Dynamic({
-                thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
-                backgroundColor: '#070707',
-                progress: 10,
-                progressColor: '#FF7A00',
-                progressBarColor: '#5F2D00',
-                name: track.info.title,
-                nameColor: '#FF7A00',
-                author: track.info.author || 'Unknown Artist',
-                authorColor: '#696969',
+            const cardImage = await dynamicCard({
+    thumbnailURL:
+      "https://i.scdn.co/image/ab67616d00001e0240d7efd2594a2b6bda60ea18", // Require
+    songTitle: "What is Love", // Require
+    songArtist: "TWICE", // Optional. Default is null.
+    trackRequester: "@lewdhutao", // Optional. Default is null.
+    fontPath: path.join(__dirname, "..", "fonts", "ArialUnicodeMS.ttf"), // Optional. Default fonts is set to Arial.
             });
 
             // Save the generated card to a file
