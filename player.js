@@ -46,7 +46,7 @@ function initializePlayer(client) {
         const requester = requesters.get(trackUri);
 
         try {
-            const musicard = await Dynamic({
+            const  musicard = await MiniPro({
         thumbnailImage: "https://lh3.googleusercontent.com/yavtBZZnoxaY21GSS_VIKSg0mvzu1b0r6arH8xvWVskoMaZ5ww3iDMgBNujnIWCt7MOkDsrKapSGCfc=w544-h544-l90-rj",
         backgroundColor: "#070707",
         progress: 10,
