@@ -47,15 +47,15 @@ function initializePlayer(client) {
 
         try {
             const musicard = await Dynamic({
-                thumbnailImage: 'https://lh3.googleusercontent.com/yavtBZZnoxaY21GSS_VIKSg0mvzu1b0r6arH8xvWVskoMaZ5ww3iDMgBNujnIWCt7MOkDsrKapSGCfc=w544-h544-l90-rj',
-                backgroundColor: '#070707',
-                progress: 10,
-                progressColor: '#FF7A00',
-                progressBarColor: '#5F2D00',
-                name: track.info.title,
-                nameColor: '#FF7A00',
-                author: track.info.author || 'Unknown Artist',
-                authorColor: '#696969',
+        thumbnailImage: "https://lh3.googleusercontent.com/yavtBZZnoxaY21GSS_VIKSg0mvzu1b0r6arH8xvWVskoMaZ5ww3iDMgBNujnIWCt7MOkDsrKapSGCfc=w544-h544-l90-rj",
+        backgroundColor: "#070707",
+        progress: 10,
+        progressColor: "#FF7A00",
+        progressBarColor: "#5F2D00",
+        name: "Burn",
+        nameColor: "#FF7A00",
+        author: "By 2WEI & Edda Hayes",
+        authorColor: "#696969"
             });
 
             // Save the generated card to a file
