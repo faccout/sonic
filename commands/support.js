@@ -41,6 +41,7 @@ module.exports = {
             setDescription(`➡️ **Join our Discord server for support and updates:**\n- Discord - ${supportServerLink}\n- Website - ${youtubeLink}`)
             .setImage('https://cdn.discordapp.com/attachments/1273947742724685875/1277995152543055932/0DC0BBD1-3E1D-4BA5-94E4-FA16355D48CA.jpg?ex=6751b5bc&is=6750643c&hm=1accf5843c766d31a9514e8e4eb596a608913763bac64c61744f3adb64644229&')
             .setTimestamp();
+      
       return interaction.reply({ embeds: [embed] });
     } catch (e) {
     console.error(e); 
