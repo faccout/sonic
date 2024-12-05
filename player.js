@@ -46,16 +46,19 @@ function initializePlayer(client) {
         const requester = requesters.get(trackUri);
 
         try {
-            const musicard = await Dynamic({
-                thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
-                backgroundColor: '#070707',
-                progress: 10,
-                progressColor: '#FF7A00',
-                progressBarColor: '#5F2D00',
-                name: track.info.title,
-                nameColor: '#FF7A00',
-                author: track.info.author || 'Unknown Artist',
-                authorColor: '#696969',
+            const musicard = usicard = await Classic({
+        thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
+        backgroundColor: "#070707",
+        progress: 10,
+        progressColor: "#FF7A00",
+        progressBarColor: "#5F2D00",
+        name: track.info.title,
+        nameColor: "#FF7A00",
+        author: track.info.author || 'Unknown Artist',
+        authorColor: "#696969",
+        startTime: "0:00",
+        endTime: "4:00",
+        timeColor: "#FF7A00"
             });
 
             // Save the generated card to a file
