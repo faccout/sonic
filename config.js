@@ -39,7 +39,7 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalinkv4-eu.serenetia.com",
+        host: "lava-all.ajieblogs.eu.org",
         port: 443,
         password: "https://dsc.gg/ajidevserver",
         reconnectTimeout: 5000,
