@@ -38,7 +38,7 @@ module.exports = {
 
   nodes: [
     {
-        name: "Naig Node - 01",
+        name: "NODE",
         host: "lavalink01.techbyte.host",
         port: 2036,
         password: "NAIGLAVA-dash.techbyte.host",
