@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lava.catfein.com",
-        port: 4000,
-        password: "catfein",
+        host: "lavalink.ddns.net",
+        port: 2433,
+        password: "discord.gg/FqEQtEtUc9",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
