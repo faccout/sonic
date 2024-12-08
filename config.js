@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalink.clxud.dev",
+        host: "lavalink.ipv4.oreshi.com",
         port: 2333,
-        password: "youshallnotpass",
+        password: "mfkdlgmklmlenrfmklsdmnfkldnslkansdlknfdlksnflksdnkf",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
