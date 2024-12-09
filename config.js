@@ -39,8 +39,8 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalink.jirayu.net",
-        port: 13592,
+        host: "lavalink-v4.huntolls-bot.xyz",
+        port: 443,
         password: "youshallnotpass",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
