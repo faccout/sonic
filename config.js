@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalink1.albinhakanson.se",
-        port: 1141,
-        password: "albinhakanson.se",
+        host: "lava-v4.beban.tech",
+        port: 80,
+        password: "bytebee_",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
