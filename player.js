@@ -48,12 +48,12 @@ function initializePlayer(client) {
         try {
             const musicard = await Dynamic({
                 thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
-                backgroundColor: '#3a928a',
+                backgroundColor: '#0c1f1d',
                 progress: 10,
                 progressColor: '#142b24',
-                progressBarColor: '#5F2D00',
+                progressBarColor: '#20514c',
                 name: track.info.title,
-                nameColor: '#142b24',
+                nameColor: '#FFFFFF',
                 author: track.info.author || 'Unknown Artist',
                 authorColor: '#20514c',
             });
