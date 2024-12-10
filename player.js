@@ -48,14 +48,14 @@ function initializePlayer(client) {
         try {
             const musicard = await Dynamic({
                 thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
-                backgroundColor: '#070707',
+                backgroundColor: '#3a928a',
                 progress: 10,
-                progressColor: '#3a928a',
+                progressColor: '#142b24',
                 progressBarColor: '#5F2D00',
                 name: track.info.title,
-                nameColor: '#3a928a',
+                nameColor: '#142b24',
                 author: track.info.author || 'Unknown Artist',
-                authorColor: '#696969',
+                authorColor: '#20514c',
             });
 
             // Save the generated card to a file
@@ -71,7 +71,7 @@ function initializePlayer(client) {
                 })
                 .setDescription('🎶 **Controls:**\n 🔁 `Loop`, ❌ `Disable`, ⏭️ `Skip`, 📜 `Queue`, 🗑️ `Clear`\n ⏹️ `Stop`, ⏸️ `Pause`, ▶️ `Resume`, 🔊 `Vol +`, 🔉 `Vol -`')
                 .setImage('attachment://musicard.png')
-                .setColor('#FF7A00');
+                .setColor('#3a928a');
 
             // Action rows for music controls
             const actionRow1 = createActionRow1(false);
