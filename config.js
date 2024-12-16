@@ -42,7 +42,7 @@ module.exports = {
         host: "lavalink.anantix.network",
         port: 2335,
         password: "pg6|(}7fuD_:7d#QQq?9",
-        reconnectTimeout: 5000,
+        reconnectTimeout: 10000,
         reconnectTries: Infinity,
         secure: false 
     },
