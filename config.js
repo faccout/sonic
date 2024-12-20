@@ -39,10 +39,10 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "neko.pylex.xyz",
+        host: "NAIGLAVA-dash.techbyte.host",
         port: 10068,
-        password: "youshallnotpass",
-        reconnectTimeout: 5000,
+        password: "lavalink01.techbyte.host",
+        reconnectTimeout: 2036,
         reconnectTries: Infinity,
         secure: false 
     },
