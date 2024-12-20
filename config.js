@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "lavalinkv4-id.serenetia.com",
-        port: 80,
-        password: "https://dsc.gg/ajidevserver",
+        host: "lavahatry4.techbyte.host",
+        port: 3000,
+        password: "NAIGLAVA-dash.techbyte.host",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
