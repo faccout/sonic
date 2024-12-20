@@ -39,10 +39,10 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "45.89.99.118",
-        port: 8000,
-        password: "winkle@team",
-        reconnectTimeout: 10000,
+        host: "lavalink1.albinhakanson.se",
+        port: 1141,
+        password: "albinhakanson.se",
+        reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
     },
