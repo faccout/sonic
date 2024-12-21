@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         name: "NODE",
-        host: "llava-v4.beban.tech",
-        port: 80,
-        password: "bytebee_",
+        host: "lavav3.prplmoe.me",
+        port: 1164,
+        password: "prplmoe.me",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
