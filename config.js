@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         identifier: "INZEWORLD.COM (DE)",
-        host: "lavalink.anantix.network",
-        port: 2335,
-        password: "pg6|(}7fuD_:7d#QQq?9",
+        host: "https://8783b762-1a9b-4298-96b4-39132279a073-00-3dgjxd6rn7qhf.pike.replit.dev/",
+        port: 433,
+        password: "specciume",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
