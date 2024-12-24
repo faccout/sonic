@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         identifier: "INZEWORLD.COM (DE)",
-        host: "lava.inzeworld.com",
-        port: 3128,
-        password: "saher.inzeworld.com",
+        host: "lavalink.anantix.network",
+        port: 2335,
+        password: "pg6|(}7fuD_:7d#QQq?9",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
