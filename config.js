@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         identifier: "INZEWORLD.COM (DE)",
-        host: "f3a3cd47-389d-45d0-8d89-a774b968c751-00-3a0ly7crgec6q.sisko.replit.dev/",
-        port: 433,
-        password: "speccuime",
+        host: "lava-v4.beban.tech",
+        port: 80,
+        password: "bytebee_",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false 
