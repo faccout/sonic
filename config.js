@@ -38,13 +38,13 @@ module.exports = {
 
   nodes: [
     {
-        identifier: "INZEWORLD.COM (DE)",
-        host: "lava-v4.beban.tech",
-        port: 80,
-        password: "bytebee_",
+        identifier: "AjieDev - Lavalink [SSL]",
+        host: "lava-v3.ajieblogs.eu.org",
+        port: 433,
+        password: "https://dsc.gg/ajidevserver",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
-        secure: false 
+        secure: true
     },
  ]
 }
