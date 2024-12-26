@@ -38,10 +38,10 @@ module.exports = {
 
   nodes: [
     {
-        identifier: "Koi Node V4",
-        host: "lavalink.ipv4.oreshi.com",
-        port: 2333,
-        password: "mfkdlgmklmlenrfmklsdmnfkldnslkansdlknfdlksnflksdnkf",
+        identifier: "Naig Node - 01",
+        host: "lavalink01.techbyte.host",
+        port: 2036,
+        password: "NAIGLAVA-dash.techbyte.host",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false
