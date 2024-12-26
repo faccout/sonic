@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         identifier: "LewdHuTao - Lavalink",
-        host: "node.lewdhutao.my.eu.org",
-        port: 80,
-        password: "youshallnotpass",
+        host: "lavalink.anantix.network",
+        port: 2335,
+        password: "pg6|(}7fuD_:7d#QQq?9",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false
