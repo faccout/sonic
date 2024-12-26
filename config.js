@@ -39,9 +39,9 @@ module.exports = {
   nodes: [
     {
         identifier: "NODE",
-        host: "lavalink1.albinhakanson.se",
-        port: 1141,
-        password: "albinhakanson.se",
+        host: "lavahatry4.techbyte.host",
+        port: 3000,
+        password: "NAIGLAVA-dash.techbyte.host",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false
