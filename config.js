@@ -38,10 +38,10 @@ module.exports = {
 
   nodes: [
     {
-        identifier: "NODE",
-        host: "lavahatry4.techbyte.host",
-        port: 3000,
-        password: "NAIGLAVA-dash.techbyte.host",
+        identifier: "Muzykant v4",
+        host: "lavalink_v4.muzykant.xyz",
+        port: 80,
+        password: "https://discord.gg/v6sdrD9kPh",
         reconnectTimeout: 5000,
         reconnectTries: Infinity,
         secure: false
