@@ -39,10 +39,10 @@ module.exports = {
   nodes: [
     {
         identifier: "Koi Node V4",
-        host: "lavav4.prplmoe.me",
+        host: "lavalink.divahost.net",
         port: 1118,
-        password: "prplmoe.me",
-        reconnectTimeout: 5000,
+        password: "divahostv4",
+        reconnectTimeout: 60002,
         reconnectTries: Infinity,
         secure: false
     },
