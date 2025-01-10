@@ -38,10 +38,10 @@ module.exports = {
 
   nodes: [
     {
-        identifier: "Koi Node V4",
-        host: "lava-v4.nextgencoders.xyz",
-        port: 2333,
-        password: "youshallnotpass",
+        identifier: "Node",
+        host: "lavalink_v4.muzykant.xyz",
+        port: 443,
+        password: "https://discord.gg/v6sdrD9kPh",
         reconnectTimeout: 60002,
         reconnectTries: Infinity,
         secure: false
