@@ -39,12 +39,12 @@ module.exports = {
   nodes: [
     {
         identifier: "Node",
-        host: "lavalink.alfari.id",
-        port: 443,
-        password: "catfein",
+        host: "lavalink.jirayu.net",
+        port: 13592,
+        password: "youshallnotpass",
         reconnectTimeout: 60002,
         reconnectTries: Infinity,
-        secure: true
+        secure: false
     },
  ]
 }
