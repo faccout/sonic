@@ -1,10 +1,39 @@
-const { Riffy } = require("riffy");
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require("discord.js");
+const { Riffy, Player } = require("riffy");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder, PermissionsBitField } = require("discord.js");
 const { queueNames, requesters } = require("./commands/play");
 const { Dynamic } = require("musicard");
 const config = require("./config.js");
+const musicIcons = require('./UI/icons/musicicons.js');
+const colors = require('./UI/colors/colors');
 const fs = require("fs");
 const path = require("path");
+const { autoplayCollection } = require('./mongodb.js');
+async function sendMessageWithPermissionsCheck(channel, embed, attachment, actionRow1, actionRow2) {
+    try {
+   
+        const permissions = channel.permissionsFor(channel.guild.members.me);
+        if (!permissions.has(PermissionsBitField.Flags.SendMessages) ||
+            !permissions.has(PermissionsBitField.Flags.EmbedLinks) ||
+            !permissions.has(PermissionsBitField.Flags.AttachFiles) ||
+            !permissions.has(PermissionsBitField.Flags.UseExternalEmojis)) {
+            console.error("Bot lacks necessary permissions to send messages in this channel.");
+            return;
+        }
+
+        const message = await channel.send({
+            embeds: [embed],
+            files: [attachment],
+            components: [actionRow1, actionRow2]
+        });
+        return message;
+    } catch (error) {
+        console.error("Error sending message:", error.message);
+        const errorEmbed = new EmbedBuilder()
+            .setColor('#FF0000')
+            .setDescription("⚠️ **Unable to send message. Check bot permissions.**");
+        await channel.send({ embeds: [errorEmbed] });
+    }
+}
 
 function initializePlayer(client) {
     const nodes = config.nodes.map(node => ({
@@ -33,11 +62,11 @@ function initializePlayer(client) {
     let collector = null;
 
     client.riffy.on("nodeConnect", node => {
-        console.log(`Node "${node.name}" connected.`);
+        console.log(`${colors.cyan}[ LAVALINK ]${colors.reset} ${colors.green}Node ${node.name} Connected ✅${colors.reset}`);
     });
-
+    
     client.riffy.on("nodeError", (node, error) => {
-        console.error(`Node "${node.name}" encountered an error: ${error.message}.`);
+        console.log(`${colors.cyan}[ LAVALINK ]${colors.reset} ${colors.red}Node ${node.name} Error ❌ | ${error.message}${colors.reset}`);
     });
 
     client.riffy.on("trackStart", async (player, track) => {
@@ -48,14 +77,14 @@ function initializePlayer(client) {
         try {
             const musicard = await Dynamic({
                 thumbnailImage: track.info.thumbnail || 'https://example.com/default_thumbnail.png',
-                backgroundColor: '#0c1f1d',
+                backgroundColor: '#070707',
                 progress: 10,
-                progressColor: '#142b24',
-                progressBarColor: '#FFFFFF',
+                progressColor: '#FF7A00',
+                progressBarColor: '#5F2D00',
                 name: track.info.title,
-                nameColor: '#FFFFFF',
+                nameColor: '#FF7A00',
                 author: track.info.author || 'Unknown Artist',
-                authorColor: '#20514c',
+                authorColor: '#696969',
             });
 
             // Save the generated card to a file
@@ -65,28 +94,33 @@ function initializePlayer(client) {
             // Prepare the attachment and embed
             const attachment = new AttachmentBuilder(cardPath, { name: 'musicard.png' });
             const embed = new EmbedBuilder()
-                .setAuthor({
-                    name: 'Now Playing',
-                    iconURL: 'https://cdn.discordapp.com/emojis/838704777436200981.gif' // Replace with actual icon URL
-                })
-                .setDescription('🎶 **Controls:**\n 🔁 `Loop`, ❌ `Disable`, ⏭️ `Skip`, 📜 `Queue`, 🗑️ `Clear`\n ⏹️ `Stop`, ⏸️ `Pause`, ▶️ `Resume`, 🔊 `Vol +`, 🔉 `Vol -`')
-                .setImage('attachment://musicard.png')
-                .setColor('#3a928a');
+            .setAuthor({ 
+                name: 'Playing Song..', 
+                iconURL: musicIcons.playerIcon,
+                url: config.SupportServer
+            })
+            .setFooter({ text: `Sonic v1.2`, iconURL: musicIcons.SonicIcon })
+            .setTimestamp()
+            .setDescription(  
+                `- **Title:** [${track.info.title}](${track.info.uri})\n` +
+                `- **Author:** ${track.info.author || 'Unknown Artist'}\n` +
+                `- **Length:** ${formatDuration(track.info.length)}\n` +
+                `- **Requester:** ${requester}\n` +
+                `- **Source:** ${track.info.sourceName}\n` + '**- Controls :**\n 🔁 `Loop`, ❌ `Disable`, ⏭️ `Skip`, 📜 `Queue`, 🗑️ `Clear`\n ⏹️ `Stop`, ⏸️ `Pause`, ▶️ `Resume`, 🔊 `Vol +`, 🔉 `Vol -`')
+            .setImage('attachment://musicard.png')
+            .setColor('#FF7A00');
 
-            // Action rows for music controls
+          
             const actionRow1 = createActionRow1(false);
             const actionRow2 = createActionRow2(false);
 
-            // Send the message and set up the collector
-            const message = await channel.send({
-                embeds: [embed],
-                files: [attachment],
-                components: [actionRow1, actionRow2]
-            });
-            currentTrackMessageId = message.id;
+            const message = await sendMessageWithPermissionsCheck(channel, embed, attachment, actionRow1, actionRow2);
+            if (message) {
+                currentTrackMessageId = message.id;
 
-            if (collector) collector.stop(); // Stop any existing collectors
-            collector = setupCollector(client, player, channel, message);
+                if (collector) collector.stop(); 
+                collector = setupCollector(client, player, channel, message);
+            }
 
         } catch (error) {
             console.error("Error creating or sending music card:", error.message);
@@ -97,6 +131,7 @@ function initializePlayer(client) {
         }
     });
 
+    
     client.riffy.on("trackEnd", async (player) => {
         await disableTrackMessage(client, player);
         currentTrackMessageId = null;
@@ -109,16 +144,32 @@ function initializePlayer(client) {
 
     client.riffy.on("queueEnd", async (player) => {
         const channel = client.channels.cache.get(player.textChannel);
-        if (channel && currentTrackMessageId) {
-            const queueEmbed = new EmbedBuilder()
-                .setColor(config.embedColor)
-                .setDescription('**Queue Songs ended! Disconnecting Bot!**');
-            await channel.send({ embeds: [queueEmbed] });
+        const guildId = player.guildId;
+    
+        try {
+         
+            const autoplaySetting = await autoplayCollection.findOne({ guildId });
+    
+            if (autoplaySetting?.autoplay) {
+                //console.log(`Autoplay is enabled for guild: ${guildId}`);
+                const nextTrack = await player.autoplay(player);
+    
+                if (!nextTrack) {
+                    player.destroy();
+                    await channel.send("⚠️ **No more tracks to autoplay. Disconnecting...**");
+                }
+            } else {
+                console.log(`Autoplay is disabled for guild: ${guildId}`);
+                player.destroy();
+                await channel.send("🎶 **Queue has ended. Autoplay is disabled.**");
+            }
+        } catch (error) {
+            console.error("Error handling autoplay:", error);
+            player.destroy();
+            await channel.send("👾**Queue Empty! Disconnecting...**");
         }
-        player.destroy();
-        currentTrackMessageId = null;
     });
-
+    
     async function disableTrackMessage(client, player) {
         const channel = client.channels.cache.get(player.textChannel);
         if (!channel || !currentTrackMessageId) return;
@@ -135,7 +186,19 @@ function initializePlayer(client) {
         }
     }
 }
+function formatDuration(ms) {
+    const seconds = Math.floor((ms / 1000) % 60);
+    const minutes = Math.floor((ms / (1000 * 60)) % 60);
+    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
 
+    return [
+        hours > 0 ? `${hours}h` : null,
+        minutes > 0 ? `${minutes}m` : null,
+        `${seconds}s`,
+    ]
+        .filter(Boolean)
+        .join(' ');
+}
 function setupCollector(client, player, channel, message) {
     const filter = i => [
         'loopToggle', 'skipTrack', 'disableLoop', 'showQueue', 'clearQueue',
@@ -183,7 +246,7 @@ async function handleInteraction(i, player, channel) {
             disableLoop(player, channel);
             break;
         case 'showQueue':
-            showQueue(channel);
+            showNowPlaying(channel, player);
             break;
         case 'clearQueue':
             player.queue.clear();
@@ -234,20 +297,18 @@ function adjustVolume(player, channel, amount) {
         sendEmbed(channel, `🔊 **Volume changed to ${newVolume}%!**`);
     }
 }
+
 function formatTrack(track) {
     if (!track || typeof track !== 'string') return track;
     
- 
     const match = track.match(/\[(.*?) - (.*?)\]\((.*?)\)/);
     if (match) {
         const [, title, author, uri] = match;
         return `[${title} - ${author}](${uri})`;
     }
     
-  
     return track;
 }
-
 
 function toggleLoop(player, channel) {
     player.setLoop(player.loop === "track" ? "queue" : "track");
@@ -259,37 +320,15 @@ function disableLoop(player, channel) {
     sendEmbed(channel, "❌ **Loop is disabled!**");
 }
 
-function showQueue(channel) {
-    if (queueNames.length === 0) {
-        sendEmbed(channel, "The queue is empty.");
+function showNowPlaying(channel, player) {
+    if (!player || !player.current || !player.current.info) {
+        sendEmbed(channel, "🚫 **No song is currently playing.**");
         return;
     }
 
-    const nowPlaying = `🎵 **Now Playing:**\n${formatTrack(queueNames[0])}`;
-    const queueChunks = [];
-
-    // Split the queue into chunks of 10 songs per embed
-    for (let i = 1; i < queueNames.length; i += 10) {
-        const chunk = queueNames.slice(i, i + 10)
-            .map((song, index) => `${i + index}. ${formatTrack(song)}`)
-            .join('\n');
-        queueChunks.push(chunk);
-    }
-
-    // Send the "Now Playing" message first
-    channel.send({
-        embeds: [new EmbedBuilder().setColor(config.embedColor).setDescription(nowPlaying)]
-    }).catch(console.error);
-
-    // Send each chunk as a separate embed
-    queueChunks.forEach(async (chunk) => {
-        const embed = new EmbedBuilder()
-            .setColor(config.embedColor)
-            .setDescription(`📜 **Queue:**\n${chunk}`);
-        await channel.send({ embeds: [embed] }).catch(console.error);
-    });
+    const track = player.current.info;
+    sendEmbed(channel, `🎵 **Now Playing:** [${track.title}](${track.uri}) - ${track.author}`);
 }
-
 
 function createActionRow1(disabled) {
     return new ActionRowBuilder()
@@ -297,7 +336,7 @@ function createActionRow1(disabled) {
             new ButtonBuilder().setCustomId("loopToggle").setEmoji('🔁').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("disableLoop").setEmoji('❌').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("skipTrack").setEmoji('⏭️').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
-            new ButtonBuilder().setCustomId("showQueue").setEmoji('📜').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
+            new ButtonBuilder().setCustomId("showQueue").setEmoji('💎').setStyle(ButtonStyle.Secondary).setDisabled(disabled),
             new ButtonBuilder().setCustomId("clearQueue").setEmoji('🗑️').setStyle(ButtonStyle.Secondary).setDisabled(disabled)
         );
 }
